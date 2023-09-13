@@ -37,7 +37,7 @@ Fragment fragmentShader(Fragment& fragment) {
     FastNoiseLite noiseGenerator;
     noiseGenerator.SetNoiseType(FastNoiseLite::NoiseType_OpenSimplex2);
 
-    // Capa de textura rojiza para áreas elevadas
+    // Capa de textura rojiza para áreas elevadas!
     float ox1 = 1200.0f;
     float oy1 = 3000.0f;
     float zoom1 = 200.0f;
