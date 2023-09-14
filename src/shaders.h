@@ -94,38 +94,6 @@ float rand(glm:: vec3 co) {
 // }
 
 
-// Fragment fragmentShader(Fragment& fragment) {
-//     Color color;
-
-//     glm::vec3 baseColor = glm::vec3(0.7f, 0.5f, 0.0f); // Color base similar a Marte (rojo/rocoso)
-
-//     glm::vec2 uv = glm::vec2(fragment.original.x, fragment.original.y);
-
-//     FastNoiseLite noiseGenerator;
-//     noiseGenerator.SetNoiseType(FastNoiseLite::NoiseType_OpenSimplex2);
-
-//     // Capa de textura roja para áreas rocosas
-//     float ox1 = 200.0f;
-//     float oy1 = 100.0f;
-//     float zoom1 = 150.0f;
-//     float noiseValue1 = noiseGenerator.GetNoise((uv.x + ox1) * zoom1, (uv.y + oy1) * zoom1);
-//     glm::vec3 rockyLayer = glm::vec3(0.8f, 0.8f, 0.8f) * noiseValue1;
-
-//     // Añade variaciones de color basadas en la altitud
-//     float altitude = uv.y * 2.0f - 1.0f; // Suponemos que uv.y está en el rango [0, 1]
-//     glm::vec3 altitudeColor = glm::vec3(0.1f, 0.1f, 0.1f) * altitude;
-
-//     // Añade todas las capas de textura y variación de color
-//     glm::vec3 finalColor = baseColor + rockyLayer + altitudeColor ;
-
-//     color = Color(static_cast<int>(finalColor.x * 255), static_cast<int>(finalColor.y * 255), static_cast<int>(finalColor.z * 255));
-
-//     fragment.color = color;
-
-//     return fragment;
-// }
-
-
 // Jupiter
 Fragment fragmentShader(Fragment& fragment) {
     Color color;
