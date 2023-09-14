@@ -10,7 +10,7 @@ En este laboratorio utilizamos los shaders para crear diferentes tipos de planet
   margin: 0 50px;
   "
 />
-<img src="https://github.com/JDgomez2002/lab04-CC2018/blob/main/examples/Sun.jpg?raw=true" 
+<img src="https://github.com/JDgomez2002/lab04-CC2018/blob/main/examples/sun_ex.jpg?raw=true" 
   style="
   width: auto;
   height: 250px;
