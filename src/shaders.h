@@ -28,49 +28,127 @@ float rand(glm:: vec3 co) {
     return glm::fract(sin(glm::dot(co, glm::vec3(12.9898, 78.233, 54.53))) * 43758.5453);
 }
 
+// Sol
+// Fragment fragmentShader(Fragment& fragment) {
+//     Color color;
+
+//     // Centro de la pantalla (suponiendo que el centro es (0, 0))
+//     glm::vec2 center = glm::vec2(0.0f, 0.0f);
+
+//     // Radio del sol
+//     float sunRadius = 0.1f;
+
+//     // Calcula la distancia del fragmento al centro de la pantalla
+//     glm::vec2 fragmentPos = glm::vec2(fragment.original.x, fragment.original.y);
+//     float distanceToCenter = glm::length(fragmentPos - center);
+
+//     // Dirección de la luz (puedes ajustarla según tus necesidades)
+//     glm::vec2 lightDirection = glm::normalize(glm::vec2(1.0f, 1.0f)); // Diagonal superior derecha
+
+//     // Calcula el producto punto entre la dirección de la luz y la dirección al fragmento
+//     float dotProduct = glm::dot(glm::normalize(fragmentPos), lightDirection);
+
+//     float shadowFactor = 0.55f; // Factor de sombra (ajusta según tus necesidades)
+//     // Calcula un color más oscuro utilizando el producto punto como factor de sombra
+//     int r = static_cast<int>(255 * (2.5f - shadowFactor * dotProduct) + 5.0f);
+//     int g = static_cast<int>(70 * (2.5f - shadowFactor * dotProduct) + 3.5f);
+//     int b = static_cast<int>( (shadowFactor * dotProduct) + 0.5f);
+//     color = Color(r+200, g, b);
+
+//     fragment.color = color;
+
+//     return fragment;
+// }
+
+
+// Marte
+// Fragment fragmentShader(Fragment& fragment) {
+//     Color color;
+
+//     glm::vec3 baseColor = glm::vec3(0.7f, 0.1f, 0.1f); // Color base similar a Marte (rojo/rocoso)
+
+//     glm::vec2 uv = glm::vec2(fragment.original.x, fragment.original.y);
+
+//     FastNoiseLite noiseGenerator;
+//     noiseGenerator.SetNoiseType(FastNoiseLite::NoiseType_OpenSimplex2);
+
+//     // Capa de textura roja para áreas rocosas
+//     float ox1 = 500.0f;
+//     float oy1 = 700.0f;
+//     float zoom1 = 150.0f;
+//     float noiseValue1 = noiseGenerator.GetNoise((uv.x + ox1) * zoom1, (uv.y + oy1) * zoom1);
+//     glm::vec3 rockyLayer = glm::vec3(0.6f, 0.3f, 0.2f) * noiseValue1;
+
+//     // Añade variaciones de color basadas en la altitud
+//     float altitude = uv.y * 2.0f - 1.0f; // Suponemos que uv.y está en el rango [0, 1]
+//     glm::vec3 altitudeColor = glm::vec3(0.1f, 0.1f, 0.1f) * altitude;
+
+//     // Añade todas las capas de textura y variación de color
+//     glm::vec3 finalColor = baseColor + rockyLayer + altitudeColor;
+
+//     color = Color(static_cast<int>(finalColor.x * 255), static_cast<int>(finalColor.y * 255), static_cast<int>(finalColor.z * 255));
+
+//     fragment.color = color;
+
+//     return fragment;
+// }
+
+
+// Fragment fragmentShader(Fragment& fragment) {
+//     Color color;
+
+//     glm::vec3 baseColor = glm::vec3(0.7f, 0.5f, 0.0f); // Color base similar a Marte (rojo/rocoso)
+
+//     glm::vec2 uv = glm::vec2(fragment.original.x, fragment.original.y);
+
+//     FastNoiseLite noiseGenerator;
+//     noiseGenerator.SetNoiseType(FastNoiseLite::NoiseType_OpenSimplex2);
+
+//     // Capa de textura roja para áreas rocosas
+//     float ox1 = 200.0f;
+//     float oy1 = 100.0f;
+//     float zoom1 = 150.0f;
+//     float noiseValue1 = noiseGenerator.GetNoise((uv.x + ox1) * zoom1, (uv.y + oy1) * zoom1);
+//     glm::vec3 rockyLayer = glm::vec3(0.8f, 0.8f, 0.8f) * noiseValue1;
+
+//     // Añade variaciones de color basadas en la altitud
+//     float altitude = uv.y * 2.0f - 1.0f; // Suponemos que uv.y está en el rango [0, 1]
+//     glm::vec3 altitudeColor = glm::vec3(0.1f, 0.1f, 0.1f) * altitude;
+
+//     // Añade todas las capas de textura y variación de color
+//     glm::vec3 finalColor = baseColor + rockyLayer + altitudeColor ;
+
+//     color = Color(static_cast<int>(finalColor.x * 255), static_cast<int>(finalColor.y * 255), static_cast<int>(finalColor.z * 255));
+
+//     fragment.color = color;
+
+//     return fragment;
+// }
+
+
+// Jupiter
 Fragment fragmentShader(Fragment& fragment) {
     Color color;
 
-    glm::vec3 baseColor = glm::vec3(0.3f, 0.5f, 0.8f); // Color base del planeta
+    glm::vec3 baseColor = glm::vec3(1.0f, 0.6f, 0.2f);
+
     glm::vec2 uv = glm::vec2(fragment.original.x, fragment.original.y);
 
     FastNoiseLite noiseGenerator;
     noiseGenerator.SetNoiseType(FastNoiseLite::NoiseType_OpenSimplex2);
 
-    // Capa de textura rojiza para áreas elevadas!
-    float ox1 = 1200.0f;
-    float oy1 = 3000.0f;
-    float zoom1 = 200.0f;
+    float shadowIntensity = 0.1f; // Reduced shadow intensity
+
+    float ox1 = 500.0f;
+    float oy1 = 700.0f;
+    float zoom1 = 150.0f;
     float noiseValue1 = noiseGenerator.GetNoise((uv.x + ox1) * zoom1, (uv.y + oy1) * zoom1);
-    glm::vec3 redLayer = glm::vec3(1.0f, 0.3f, 0.1f) * noiseValue1;
+    glm::vec3 jupiterLayer = glm::vec3(0.9f, 0.7f, 0.4f) * noiseValue1 * (1.0f - shadowIntensity);
 
-    // Capa de textura amarilla para áreas con vegetación
-    float ox2 = 800.0f;
-    float oy2 = 500.0f;
-    float zoom2 = 150.0f;
-    float noiseValue2 = noiseGenerator.GetNoise((uv.x + ox2) * zoom2, (uv.y + oy2) * zoom2);
-    glm::vec3 yellowLayer = glm::vec3(1.0f, 1.0f, 0.0f) * noiseValue2;
+    float altitude = uv.y * 2.0f - 1.0f;
+    glm::vec3 altitudeColor = glm::vec3(0.9f, 0.7f, 0.4f) * altitude * (1.0f - shadowIntensity);
 
-    // Capa de textura verde para áreas con agua
-    float ox3 = 2000.0f;
-    float oy3 = 1000.0f;
-    float zoom3 = 100.0f;
-    float noiseValue3 = noiseGenerator.GetNoise((uv.x + ox3) * zoom3, (uv.y + oy3) * zoom3);
-    glm::vec3 greenLayer = glm::vec3(0.0f, 0.8f, 0.2f) * noiseValue3;
-
-    // Capa de textura blanca para áreas de nieve o hielo
-    float ox4 = 3000.0f;
-    float oy4 = 2500.0f;
-    float zoom4 = 120.0f;
-    float noiseValue4 = noiseGenerator.GetNoise((uv.x + ox4) * zoom4, (uv.y + oy4) * zoom4);
-    glm::vec3 whiteLayer = glm::vec3(0.5f, 0.5f, 0.5f) * noiseValue4;
-
-    // Añade todas las capas de textura y variación de color
-    glm::vec3 finalColor = baseColor + redLayer + yellowLayer + greenLayer + whiteLayer;
-
-    // Añade un efecto de atmósfera
-    float atmosphereFactor = 0.3f; // Controla la intensidad de la atmósfera
-    finalColor = glm::mix(finalColor, glm::vec3(0.1f, 0.1f, 0.1f), fragment.intensity * atmosphereFactor);
+    glm::vec3 finalColor = baseColor + jupiterLayer + altitudeColor;
 
     color = Color(static_cast<int>(finalColor.x * 255), static_cast<int>(finalColor.y * 255), static_cast<int>(finalColor.z * 255));
 
@@ -78,3 +156,4 @@ Fragment fragmentShader(Fragment& fragment) {
 
     return fragment;
 }
+
